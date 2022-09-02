@@ -5,7 +5,6 @@ import { toggleForm, clearForm } from "./form";
 import Logo from "../images/logo.png";
 import Bear from "../images/bear.png";
 import Dog from "../images/dog.png";
-
 //import CSS
 import "../css/index.css";
 //import bootstrap
@@ -26,6 +25,14 @@ window.addEventListener("load", function () {
   document.getElementById("bearThumbnail").src = Bear;
   document.getElementById("dogThumbnail").src = Dog;
 });
+
+//register service worker
+if('serviceWorker' in navigator) {
+  //use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  })
+};
 
 //delete card functionality
 window.deleteCard = (e) => {
