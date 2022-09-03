@@ -42,7 +42,7 @@ module.exports = {
     //   swSrc: './src/sw.js',
     //   swDest: 'service-worker.js',
     // }),
-    // new GenerateSW(),
+    new GenerateSW(),
     new WebpackPwaManifest({
       name: 'Contact Cards Application',
       short_name: 'Contact Cards',
