@@ -17,6 +17,21 @@ import { initDb, getDb, postDb, deleteDb, editDb } from "./database";
 //import html render
 import { fetchCards } from "./cards";
 
+const installBtn = document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = "visible";
+  installBtn.addEventListener("click", () => {
+    event.prompt();
+    installBtn.setAttribute("disabled", true);
+    installBtn.textContent = "Installed!";
+  });
+});
+
+window.addEventListener('appinstalled', (event) => {
+  console.log('👍', 'appinstalled', event);
+});
+
 //add images on load
 window.addEventListener("load", function () {
   initDb();
@@ -27,12 +42,12 @@ window.addEventListener("load", function () {
 });
 
 //register service worker
-if('serviceWorker' in navigator) {
+if ("serviceWorker" in navigator) {
   //use the window load event to keep the page load performant
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js');
-  })
-};
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
 
 //delete card functionality
 window.deleteCard = (e) => {
@@ -61,7 +76,7 @@ window.editCard = (e) => {
   form.style.display = "block";
 
   // Toggles the Submit button so that it now Updates an existing contact instead of posting a new one
-    submitBtnToUpdate = true;
+  submitBtnToUpdate = true;
 };
 
 // Form functionality
